@@ -1,0 +1,54 @@
+<div class = "container signupForm">
+  <h2 id = "menu-categories-title" class="text-center">Sign up for NewsLetter!</h2>
+
+  <fieldset>
+    <legend>Registration</legend>
+    <form name ="newsLetter" novalidate>
+      
+      <input type="text" name="firstName" placeholder="Enter First Name" ng-model="signupCtrl.info.firstName"
+        required
+        pattern="[a-zA-Z][a-zA-Z\s]*">
+        <span ng-if="newsLetter.firstName.$error.required && newsLetter.firstName.$touched ">
+          Please Enter a First Name
+        </span>
+        <span ng-if="newsLetter.firstName.pattern.$invalid && newsLetter.firstName.$touched ">
+          First name must have only alphabets
+        </span>
+        <br>
+
+      <input type="text" name="lastName" placeholder="Enter Last Name" ng-model="signupCtrl.info.lastName"
+        pattern="[a-zA-Z][a-zA-Z\s]*">
+        <span ng-if="newsLetter.lastName.$invalid && newsLetter.lastName.$touched">
+          Last name must have only alphabets
+        </span>
+        <br>
+
+      <input type="email" name="email" placeholder="Email" ng-model="signupCtrl.info.email"
+        required>
+        <span ng-if="newsLetter.email.$invalid && newsLetter.email.$touched">
+              Must be a valid email address: handle@domain format
+        </span>
+        <br>
+
+      <input type="text" name="phone" placeholder="Phone ###-###-####" ng-model="signupCtrl.info.phone"
+        pattern="(\d{3})-(\d{3})-(\d{4})">
+        <span ng-if="newsLetter.phone.$invalid && newsLetter.phone.$touched">
+              Phone must be in the format ###-###-####.
+        </span>
+        <br>
+
+      <input type="text" name="favMenu" placeholder="Enter Favourite Menu Number" ng-model="signupCtrl.info.favMenu"
+        ng-blur="signupCtrl.validateFavItem()">
+        <span ng-if="signupCtrl.isInvalidItem">No Such Menu Number Exists, please try again! </span>
+        <br>
+
+      <button
+              ng-disabled="newsLetter.$invalid || signupCtrl.isInvalidItem"
+              ng-click="signupCtrl.submit()"
+              class="btn btn-primary btn-lg">Submit</button>
+    </form>
+
+    <div ng-if="signupCtrl.completed">Your information has been saved</div>
+
+  </fieldset>
+</div>
